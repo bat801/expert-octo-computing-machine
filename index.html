@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лунное Братство — Лунный календарь • Уфа</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/suncalc.js"></script>
+  <script src="js/lunar-calc.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="header__titles">
+        <h1 class="header__title">Лунное Братство</h1>
+        <p class="header__subtitle">Лунный календарь • Уфа</p>
+      </div>
+      <div class="header__date" id="current-date"></div>
+    </header>
+
+    <main class="main">
+      <section class="hero" id="hero">
+        <div class="hero__moon-wrapper">
+          <svg
+            id="moon-svg"
+            class="hero__moon"
+            viewBox="0 0 120 120"
+            aria-hidden="true"
+          >
+            <defs>
+              <radialGradient id="moonGlow" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#f5f5ff" stop-opacity="1" />
+                <stop offset="60%" stop-color="#c3c7ff" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0" />
+              </radialGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <circle
+              cx="60"
+              cy="60"
+              r="40"
+              fill="url(#moonGlow)"
+              opacity="0.7"
+            ></circle>
+
+            <g id="moon-shape" class="moon-shape moon-shape--full" filter="url(#softGlow)">
+              <circle cx="60" cy="60" r="32" class="moon-shape__full"></circle>
+              <path
+                class="moon-shape__crescent"
+                d="M60,28
+                   A32,32 0 1,0 60,92
+                   A22,32 0 1,1 60,28Z"
+              ></path>
+              <rect
+                class="moon-shape__half"
+                x="60"
+                y="28"
+                width="32"
+                height="64"
+              ></rect>
+              <path
+                class="moon-shape__waning"
+                d="M60,28
+                   A32,32 0 1,1 60,92
+                   A22,32 0 1,0 60,28Z"
+              ></path>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hero__info">
+          <div class="hero__label">Лунный день</div>
+          <div class="hero__day" id="lunar-day">—</div>
+          <div class="hero__phase" id="lunar-phase">—</div>
+        </div>
+      </section>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <div class="info-card__label">Начало дня</div>
+          <div class="info-card__value" id="start-time">—</div>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card__label">Конец дня</div>
+          <div class="info-card__value" id="end-time">—</div>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card__label">Фаза</div>
+          <div class="info-card__value" id="phase-name">—</div>
+        </article>
+      </section>
+
+      <section class="haircut-card" id="haircut-card">
+        <div class="haircut-card__label">Стрижка</div>
+        <div class="haircut-card__value fade-swap" id="haircut-description">—</div>
+      </section>
+
+      <!-- Блок сверки с mirkosmosa.ru -->
+      <section class="verify-card" id="verify-card">
+        <div class="verify-card__header">
+          <span class="verify-card__icon">🔍</span>
+          <span class="verify-card__title">Сверка с mirkosmosa.ru</span>
+          <button class="verify-card__refresh" id="verify-refresh" type="button" aria-label="Обновить">↻</button>
+        </div>
+        <div class="verify-card__content">
+          <div class="verify-item">
+            <div class="verify-item__label">Сегодня (с сайта)</div>
+            <div class="verify-item__value" id="verify-today">—</div>
+          </div>
+          <div class="verify-item">
+            <div class="verify-item__label">Завтра (с сайта)</div>
+            <div class="verify-item__value" id="verify-tomorrow">—</div>
+          </div>
+          <div class="verify-item verify-item--status">
+            <div class="verify-item__label">Статус</div>
+            <div class="verify-item__value" id="verify-status">Загрузка...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="navigation">
+        <button class="nav-button" id="prev-day" type="button" aria-label="Предыдущий день">
+          ‹
+        </button>
+        <div class="navigation__status">
+          <span id="day-context-label">Сегодня</span>
+        </div>
+        <button class="nav-button" id="next-day" type="button" aria-label="Следующий день">
+          ›
+        </button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Координаты: Уфа, 54.4847°N, 55.8825°E • Часовой пояс: Asia/Yekaterinburg (UTC+5)</span>
+    </footer>
+  </div>
+</body>
+</html>
+
