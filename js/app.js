@@ -241,12 +241,12 @@
     init();
   }
 
-    // ============================================
+  // ============================================
   // Блок сверки с mirkosmosa.ru
   // ============================================
   
   // URL вашего Cloudflare Worker
-  const VERIFY_WORKER_URL = 'https://bromoon.batyr1580.workers.dev';
+  const VERIFY_WORKER_URL = 'https://lunar-parser.batyr1580.workers.dev';
   
   let verifyLoading = false;
   
